@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Navigate, useParams } from 'react-router';
 import { useProduct } from '@/admin/hooks/useProduct';
 import { CustomFullScreenLoading } from '@/components/custom/CustomFullScreenLoading';
+import { ImageCarousel } from '@/shop/components/ImageCarousel';
 
 
 export const ProductPage = () => {
@@ -29,15 +30,8 @@ export const ProductPage = () => {
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         {/* Imagen del producto */}
-        <div className="flex justify-center items-center">
-          <div className="rounded-2xl border border-slate-200 overflow-hidden shadow-md bg-white">
-            <img
-              src={product.images[0]}
-              alt={product.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
+
+        <ImageCarousel product={product} />
 
         {/* Información del producto */}
         <div className="space-y-6">

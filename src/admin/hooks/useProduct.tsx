@@ -17,7 +17,6 @@ export const useProduct = (id: string) => {
   const mutation = useMutation({
     mutationFn: creteUpdateProductAction,
     onSuccess: (product: Product) => {
-      console.log('Todo salió bien', product);
 
       // invalidar cache
       queryClient.invalidateQueries({ queryKey: ['products'] });

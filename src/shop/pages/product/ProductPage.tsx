@@ -1,20 +1,28 @@
 
 import { Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { products } from "@/mocks/products.mock"
-
+import { Navigate, useParams } from 'react-router';
+import { useProduct } from '@/admin/hooks/useProduct';
+import { CustomFullScreenLoading } from '@/components/custom/CustomFullScreenLoading';
 
 
 export const ProductPage = () => {
 
   //Buscás el producto correspondiente
-  const product = products[0];
+  const { id } = useParams();
+  const { isLoading, isError, data: product } = useProduct(id || '');
 
-  if (!product) {
-    return <p className="text-center mt-10 text-red-500">Producto no encontrado</p>;
+  if (isError) {
+    return <Navigate to='/admin/products' />
   }
 
+  if (isLoading) {
+    return <CustomFullScreenLoading />
+  }
 
+  if (!product) {
+    return <Navigate to='/admin/products' />
+  }
 
   return (
 
@@ -24,8 +32,8 @@ export const ProductPage = () => {
         <div className="flex justify-center items-center">
           <div className="rounded-2xl border border-slate-200 overflow-hidden shadow-md bg-white">
             <img
-              src={product.image}
-              alt={product.name}
+              src={product.images[0]}
+              alt={product.title}
               className="w-full h-full object-cover"
             />
           </div>
@@ -35,7 +43,7 @@ export const ProductPage = () => {
         <div className="space-y-6">
           <div>
             <h1 className="text-3xl font-bold text-slate-900">
-              {product.name}
+              {product.title}
             </h1>
             <p className="text-slate-600 mt-2">{product.description}</p>
           </div>
@@ -44,7 +52,7 @@ export const ProductPage = () => {
             <span className="text-2xl font-semibold text-blue-600">
               ${product.price}
             </span>
-            {/* <span
+            <span
               className={`px-3 py-1 rounded-full text-sm font-medium ${product.stock > 5
                 ? 'bg-green-100 text-green-800'
                 : product.stock > 0
@@ -57,13 +65,13 @@ export const ProductPage = () => {
                 : product.stock > 0
                   ? 'Bajo stock'
                   : 'Sin stock'}
-            </span> */}
+            </span>
           </div>
 
           <div className="flex items-center gap-2">
             <Tag className="h-4 w-4 text-slate-500" />
             <span className="text-slate-700 font-medium">
-              Categoría: {product.category}
+              Categoría: {product.gender}
             </span>
           </div>
 

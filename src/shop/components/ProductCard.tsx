@@ -18,7 +18,7 @@ export const ProductCard = ({ id, name, price, image, category, sizes }: Product
       <CardContent className="p-0">
         <div className="relative aspect-square overflow-hidden bg-muted rounded-lg">
 
-          <Link to={`product/${id}`}>
+          <Link to={`/products/${id}`}>
             <img
               src={image}
               alt={name}

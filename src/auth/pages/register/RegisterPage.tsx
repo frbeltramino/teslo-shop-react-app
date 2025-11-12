@@ -34,7 +34,6 @@ export const RegisterPage = () => {
       navigate('/');
       return
     }
-    console.log({ email, password, fullName })
     toast.error('Correo o/y contraseña no válido');
 
     setIsPosting(false);

@@ -21,8 +21,6 @@ export const AdminProductPage = () => {
 
   const handleSubmit = async (productLike: Partial<Product> & { files?: File[] }) => {
 
-    console.log(productLike);
-
     await mutation.mutateAsync(productLike, {
       onSuccess: (data) => {
         toast.success('Producto actualizado correctamente', {
@@ -30,8 +28,7 @@ export const AdminProductPage = () => {
         });
         navigate(`/admin/products/${data.id}`);
       },
-      onError: (error) => {
-        console.log(error);
+      onError: () => {
         toast.error('Error al actualizar el producto');
       }
     });

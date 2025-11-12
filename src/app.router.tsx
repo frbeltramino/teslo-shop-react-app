@@ -29,7 +29,7 @@ export const appRouter = createHashRouter([
         element: <HomePage />
       },
       {
-        path: 'product/:idSlug',
+        path: 'products/:id',
         element: <ProductPage />
       },
       {
